@@ -15,15 +15,55 @@ function displayMenu(){
     console.log(chalk.blue("4. Exit"));
 }
 
+const addTask = () => {
+    rl.question(chalk.bgMagentaBright("Write the task: "), (task) => {
+        tasks.push({ task, completed: false});
+        console.log(chalk.green.bold("Task added successfully!"));
+        displayMenu();
+        chooseOption();
+    })
+}
+
+const viewTasks = () => {
+    console.log(chalk.yellow.bold("\nYour Tasks: \n"));
+
+    if(tasks.length === 0){
+        console.log(chalk.red("No tasks to display."));
+    }
+
+    tasks.forEach((t, index) => {
+        let status = t.completed ? "✅" : "❌";
+        console.log(chalk.cyan(`${index + 1}. ${status} - ${t.task}`))
+    })
+
+    continuePromt();
+}
+
+const completeTask = () => {
+
+}
+
+const continuePromt = () =>{
+    rl.question(chalk.yellow("Do you want to perform another action? (y/n): "), (answer) => {
+        if(answer.toLowerCase() === "y"){
+            displayMenu();
+            chooseOption();
+        } else {
+            console.log(chalk.green("Goodbye!"));
+            rl.close();
+        }
+    });
+}
+
+
 function chooseOption(){
     rl.question(chalk.yellow("Choose an option: "), (choice) => {
         switch(choice){
             case "1":
-                console.log("Adding a new task...");
-               
+                addTask();
                 break;
             case "2":
-                console.log("Viewing tasks...");
+                viewTasks();
                
                 break;
             case "3":
