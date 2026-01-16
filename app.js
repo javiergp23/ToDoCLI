@@ -33,7 +33,7 @@ const viewTasks = () => {
 
     tasks.forEach((t, index) => {
         let status = t.completed ? "✅" : "❌";
-        if(t){
+        if(t.completed){
             console.log(chalk.greenBright(`${index + 1}. ${status} - ${t.task}`))
         }else{
             console.log(chalk.redBright(`${index + 1}. ${status} - ${t.task}`))
@@ -90,7 +90,7 @@ function chooseOption(){
                 console.log(chalk.red("Invalid option. Please try again."));
                 break;
         }
-        }
+     }
     );}
 
     displayMenu();
