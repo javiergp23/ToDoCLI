@@ -33,14 +33,28 @@ const viewTasks = () => {
 
     tasks.forEach((t, index) => {
         let status = t.completed ? "✅" : "❌";
-        console.log(chalk.cyan(`${index + 1}. ${status} - ${t.task}`))
+        if(t){
+            console.log(chalk.greenBright(`${index + 1}. ${status} - ${t.task}`))
+        }else{
+            console.log(chalk.redBright(`${index + 1}. ${status} - ${t.task}`))
+        }
     })
 
     continuePromt();
 }
 
 const completeTask = () => {
-
+    rl.question("Type the task number to mark as completed: ", (num) => {
+        const index = parseInt(num) - 1;
+        if(index >= 0 && index < tasks.length){
+            tasks[index].completed = true;
+            console.log(chalk.green("Task marked as completed!"));
+        }else{
+            console.log(chalk.red("Invalid task number."));
+        }
+        displayMenu();
+        chooseOption();
+    });
 }
 
 const continuePromt = () =>{
@@ -64,11 +78,9 @@ function chooseOption(){
                 break;
             case "2":
                 viewTasks();
-               
                 break;
             case "3":
-                console.log("Completing a task...");
-             
+                completeTask();
                 break;
             case "4":
                 console.log("Exiting...");
