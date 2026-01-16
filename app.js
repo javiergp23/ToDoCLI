@@ -15,4 +15,31 @@ function displayMenu(){
     console.log(chalk.blue("4. Exit"));
 }
 
-displayMenu();
+function chooseOption(){
+    rl.question(chalk.yellow("Choose an option: "), (choice) => {
+        switch(choice){
+            case "1":
+                console.log("Adding a new task...");
+               
+                break;
+            case "2":
+                console.log("Viewing tasks...");
+               
+                break;
+            case "3":
+                console.log("Completing a task...");
+             
+                break;
+            case "4":
+                console.log("Exiting...");
+                rl.close();
+                break;
+            default:
+                console.log(chalk.red("Invalid option. Please try again."));
+                break;
+        }
+        }
+    );}
+
+    displayMenu();
+    chooseOption();
